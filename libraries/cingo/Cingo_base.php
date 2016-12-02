@@ -122,7 +122,7 @@ class Cingo_base
   }
 
 
-  protected function _create_pattern($val, $wildcard, $flags) {
+  public function create_pattern($val, $wildcard, $flags) {
     return new MongoDB\BSON\Regex($wildcard['before'] . $val . $wildcard['after'], $flags);
   }
 
@@ -224,6 +224,10 @@ class Cingo_base
       $var = array($var => $val);
       $val = NULL;
     }
+    // Simplify all/in/nin queries if only one value is specified
+    #if (in_array($operator, array('$in', '$nin', '$all')) && count($var) == 1) {
+    #  $operator = '';
+    #}
     $query = array();
     foreach ($var as $key => $val) {
       // Create regex patterns if $wildcard is specified
@@ -250,6 +254,7 @@ class Cingo_base
 
 
   public function _query($collection=NULL, $where=NULL, $limit=NULL, $offset=NULL) {
+    $query = $this->_create_query($collection, $where, $limit, $offset);
     if ($this->_distinct) {
       // Break the result of a distinct query into documents (instead of returning
       // a single document with multiple values)
@@ -283,7 +288,6 @@ class Cingo_base
       $num_rows = count($results);
     }
     else {
-      $query = $this->_create_query($collection, $where, $limit, $offset);
       $datasource = $this->database . '.' . $this->_collection;
       $cursor = $this->manager->executeQuery($datasource, $query);
       // Reset limit and skip so we get the full count
