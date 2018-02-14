@@ -1,23 +1,22 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Creates a cursor-like object to use for document expansions
  *
  * Used to create documents from the unique values returned by a distinct
  * query, for example.
  *
- * PHP version 5
- *
- * @package CodeIgniter
- * @subpackage cingo
+ * @package   ciocase
+ * @author    Adam Mansur <mansura@si.edu>
+ * @copyright (c) 2017-2018 Smithsonian Institution
+ * @license   MIT License
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cingo_fake_cursor implements Iterator
 {
 
   private $cursor;
-  
+
 
   public function __construct($cursor) {
 		$this->cursor = $cursor;

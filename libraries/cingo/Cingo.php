@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Formats and runs MongoDB queries using CodeIgniter QueryBuilder syntax
  *
@@ -7,15 +7,15 @@
  * implemented return an error. Only select methods have been implemented
  * so far.
  *
- * PHP version 5
- *
- * @package CodeIgniter
- * @subpackage cingo
+ * @package   ciocase
+ * @author    Adam Mansur <mansura@si.edu>
+ * @copyright (c) 2017-2018 Smithsonian Institution
+ * @license   MIT License
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once('Cingo_query.php');
+
 
 class Cingo extends Cingo_query
 {

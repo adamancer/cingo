@@ -1,4 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Backend functions to format CodeIgniter Query Builder queries for MongoDB
+ *
+ * @package   cingo
+ * @author    Adam Mansur <mansura@si.edu>
+ * @copyright (c) 2017-2018 Smithsonian Institution
+ * @license   MIT License
+ */
+
 
 class Cingo_connect
 {

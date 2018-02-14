@@ -1,14 +1,13 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Container allowing echoing and re-use of compiled MongoDB searches
  *
- * PHP version 5
- *
- * @package CodeIgniter
- * @subpackage cingo
+ * @package   cingo
+ * @author    Adam Mansur <mansura@si.edu>
+ * @copyright (c) 2017-2018 Smithsonian Institution
+ * @license   MIT License
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cingo_compiled
 {

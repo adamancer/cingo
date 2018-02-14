@@ -1,14 +1,13 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Reproduces public methods of CodeIgniter Result object for MongoDB cursor
  *
- * PHP version 5
- *
- * @package CodeIgniter
- * @subpackage cingo
+ * @package   ciocase
+ * @author    Adam Mansur <mansura@si.edu>
+ * @copyright (c) 2017-2018 Smithsonian Institution
+ * @license   MIT License
  */
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Cingo_result
 {
@@ -19,6 +18,15 @@ class Cingo_result
 
   public function __construct($cursor, $num_rows=0) {
 		$this->cursor	= $cursor;
+    // Counting all matches can be prohibitively slow for large collections,
+    // so by default the count query is kept on a pretty short leash. If the
+    // count fails but the cursor contains records, $this->num_rows() return
+    // -1 so that result sets with no count can be distinguished but still
+    // evaluate as TRUE.
+    if (is_null($num_rows)) {
+      $num_rows = (count($this->result())) ? -1 : 0;
+      $this->result_array();
+    }
     $this->_num_rows = $num_rows;
 	}
 
